@@ -1,0 +1,31 @@
+<h1>投稿の一覧</h1>
+
+
+<% @blogs.each do |blog| %>
+
+  <div class="card" style="width: 18rem;">
+    <% if blog.image.present? %>
+      <%= image_tag (blog.image.url), class:"card-img-top" %>
+    <% else %>
+      <%= image_tag 'noimage.png'%>
+    <% end %>
+
+    <div class="card-body">
+      <h5 class="card-title">コメント</h5>
+      <p class="card-text"><%= blog.content %></p>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">投稿者<%#<%= blog.user.name %></li>
+      <li class="list-group-item">詳細</li>
+      <li class="list-group-item">お気に入り</li>
+    </ul>
+
+    <div class="card-body">
+      <a href="#" class="card-link">編集</a>
+      <a href="#" class="card-link">削除</a>
+    </div>
+  </div>
+<% end %> 
+
+<%= link_to '新規投稿', new_blog_path %>
