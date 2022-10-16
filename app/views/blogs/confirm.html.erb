@@ -1,0 +1,17 @@
+<h2>投稿確認画面</h2>
+
+<%= form_with(model: @blog, url:blogs_path, local: true) do |form| %>
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :image_cache %>
+
+  <div class="card" style="width: 18rem;">
+    <% if @blog.image.url.present? %>
+      <%= img_tag(@blog.image.url), class:"card-img-top" %>
+    <% else %>
+      <%= img_tag 'noimage.png', class:"card-img-top" %>
+    <% end %>
+    <div class="card-body">
+      <p class="card-text">【コメント】<%= @blog.content%></p>
+    </div>
+  </div>
+<% end %>
