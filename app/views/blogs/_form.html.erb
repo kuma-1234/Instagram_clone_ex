@@ -1,23 +1,33 @@
-<%= form_with(model: @blog, local: true) %>
+<%= form_with(model: @blog, local: true, url: new_or_edit) do |form| %>
 
-  <% if @blog.errors.eny? %>
+  <% if @blog.errors.any? %>
     <div class="error_explanation">
-    <h2><%= @blog.errors.count %>件のエラーがあります。</h2>
-    <ul>
-    <% @blog.errors.full_message.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
+      <h2><%= @blog.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @blog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul> 
+    </div>
   <% end %>
 
-  <div class="blog_content">
-    <%= form.label :コメント　%>
-    <%= form.text_field :content %>
+
+<div class="card" style="width: 18rem;">
+    <%= image_tag(@blog.image.url, class:"card-img-top") if @blog.image && @blog.image.url %>
+    <%= form.file_field :image %>
+    <%= form.hidden_field :image_cache %>
+  
+
+  <div class="card-body">
+    <h5 class="card-title">コメント</h5>
+    <p class="card-text"><%= @blog.content %></p>
   </div>
 
-  <div class="blog_image">
-    <%= form.label :投稿写真　%>
-    <%= form.file_field :image %>
+  <div class="card-body">
+    <a><%#<%= link_to '編集', edit_blog_path(blog.id), class:"card-link" %></a>
   </div>
+</div>
+
 
   <br>
 
