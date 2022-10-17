@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :blogs do
     collection do
-      post :collection
+      post :confirm
     end
   end
 end
