@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  before_action :limit_user, only:[:edit, :update, :destroy]
 
   def index
     @blogs = Blog.all
@@ -14,7 +15,8 @@ class BlogsController < ApplicationController
     render :new
     else
       if @blog.save
-        redirect_to new_blogs_path
+      ContactMailer.contact_mail(@blog).deliver
+        redirect_to blogs_path
       else
         render :new
       end
@@ -41,6 +43,7 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
+    @favorite = current_user.favorites.find_by(blog_id: @blog.id)
   end
 
   def destroy
@@ -53,6 +56,14 @@ class BlogsController < ApplicationController
 
   def blog_params
     params.require(:blog).permit(:content, :image, :image_cache)
+  end
+
+  def limit_user
+    @blogs = current_user.blogs
+    @blog = @blogs.find_by(id: params[:id])
+    unless @blog == @blogs
+      redirect_to blogs_path
+    end
   end
 end
 
