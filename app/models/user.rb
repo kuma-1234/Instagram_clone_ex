@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, length: { minimum: 6 }, on: :new
   mount_uploader :icon_image, ImageUploader
+  has_many :books
 end
