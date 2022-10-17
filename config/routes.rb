@@ -6,5 +6,5 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
-  resources :favorites, only[ :create, :destroy, :show ]
+  resources :favorites, only:[ :create, :destroy, :show ]
 end
