@@ -1,0 +1,22 @@
+<p>お気に入りの一覧</p>
+
+<% if @favorites.present? %>
+  <% @favorites.each do |favorite| %>
+    <div class="card" style="width: 18rem;">
+      <% if favorite.blog.image.present? %>
+        <%= image_tag (favorite.blog.image.url), class:"card-img-top" %>
+      <% else %>
+        <%= image_tag 'noimage.png'%>
+      <% end %>
+
+      <div class="card-body">
+        <h5 class="card-title">コメント</h5>
+        <p class="card-text"><%= favorite.blog.content %></p>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">【投稿者】<%= image_tag favorite.blog.user.icon_image.url, size:'50x50' %><%= favorite.blog.user.name %></li>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
