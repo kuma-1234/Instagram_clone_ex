@@ -3,7 +3,6 @@
 <%= link_to '新規投稿', new_blog_path %>
 
 <% @blogs.each do |blog| %>
-
   <div class="card" style="width: 18rem;">
     <% if blog.image.present? %>
       <%= image_tag (blog.image.url), class:"card-img-top" %>
@@ -17,14 +16,18 @@
     </div>
 
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">【投稿者】<%= blog.user.name %></li>
-      <li class="list-group-item">詳細</li>
-      <li class="list-group-item">お気に入り</li>
+      <li class="list-group-item">【投稿者】<%= image_tag blog.user.icon_image.url, size:'50x50' %><%= blog.user.name %></li>
+      <li class="list-group-item"><%=link_to '詳細', blog_path(blog.id) %></li>
     </ul>
 
     <div class="card-body">
-      <a><%= link_to '編集', edit_blog_path(blog.id), class:"card-link" %></a>
-      <a><%= link_to '削除', blog_path(blog.id), method: :delete, data:{confirm:'本当に削除しても良いですか？'}, class:"card-link"%></a>
+      <% if blog.user == current_user %>
+        <a><%= link_to '編集', edit_blog_path(blog.id), class:"card-link" %></a>
+        <a><%= link_to '削除', blog_path(blog.id), method: :delete, data:{confirm:'本当に削除しても良いですか？'}, class:"card-link"%></a>
+      <% else %>
+        <a></a>
+        <a></a>
+      <% end %>
     </div>
   </div>
 <% end %> 
