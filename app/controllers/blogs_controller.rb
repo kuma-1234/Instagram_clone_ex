@@ -1,5 +1,4 @@
 class BlogsController < ApplicationController
-  before_action :limit_user, only:[:edit, :update, :destroy]
 
   def index
     @blogs = Blog.all
@@ -30,15 +29,22 @@ class BlogsController < ApplicationController
 
   def edit
     @blog = Blog.find(params[:id])
+    unless @blog.user_id == current_user.id
+      redirect_to blogs_path
+    end
   end
 
   def update
     @blog = Blog.find(params[:id])
+    if @blog.user_id != current_user.id
+      redirect_to blogs_path
+    else
       if @blog.update(blog_params)
         redirect_to blogs_path, notice: "投稿しました！"
       else
         render :edit
       end
+    end
   end
 
   def show
@@ -48,8 +54,12 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
-    @blog.destroy
-    redirect_to blogs_path, notice: "ブログを削除しました！"
+    if @blog.user_id != current_user.idq
+      redirect_to blogs_path
+    else
+      @blog.destroy
+      redirect_to blogs_path, notice: "ブログを削除しました！"
+    end
   end
 
   private
@@ -57,15 +67,4 @@ class BlogsController < ApplicationController
   def blog_params
     params.require(:blog).permit(:content, :image, :image_cache)
   end
-
-  def limit_user
-    @blogs = current_user.blogs
-    @blog = @blogs.find_by(id: params[:id])
-    unless @blog == @blogs
-      redirect_to blogs_path
-    end
-  end
 end
-
-
-
