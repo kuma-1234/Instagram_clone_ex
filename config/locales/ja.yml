@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    models:
+      blog: ブログ
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirm: 確認用パスワード
+        icon_image: プロフィール写真
+      blog:
+        content: 内容
+        image: 投稿写真
+  errors:
+    format: "%{attribute}%{message}"
+    messages: 
+      blank: を入力してください
+      too_short: は6文字以上で入力してください
+      invalid: 無効です
+      taken: はすでに使用されています 
