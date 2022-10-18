@@ -39,6 +39,7 @@ gem 'mini_magick'
 gem 'pry-rails'
 gem 'rexml'
 gem 'faker'
+gem 'bcrypt'
 
 gem 'net-smtp'
 gem 'net-imap'
