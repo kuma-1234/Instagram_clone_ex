@@ -5,7 +5,7 @@
 <% @blogs.each do |blog| %>
   <div class="card" style="width: 18rem;">
     <% if blog.image.present? %>
-      <%= image_tag blog.image.url, class:"card-img-top" %>
+      <%= image_tag blog.image.to_s, class:"card-img-top" %>
     <% else %>
       <%= image_tag 'noimage.png'%>
     <% end %>

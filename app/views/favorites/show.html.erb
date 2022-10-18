@@ -15,7 +15,13 @@
       </div>
 
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">【投稿者】<%= image_tag favorite.blog.user.icon_image.url, size:'50x50' %><%= favorite.blog.user.name %></li>
+        <li class="list-group-item">【投稿者】
+        <% if favorite.blog.user.icon_image.present? %>
+          <%= image_tag favorite.blog.user.icon_image.url, size:'50x50' %><%= favorite.blog.user.name %>
+        <% else %>
+          <%= image_tag 'noimage.png', size: '50x50' %><%= favorite.blog.user.name %>
+        <% end %>
+        </li>
       </ul>
     </div>
   <% end %>
