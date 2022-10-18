@@ -17,11 +17,11 @@
     <% end %>
 
     <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      <%= link_to "Profile", user_path(current_user.id), class:'btn btn-secondary' %>
+      <%= link_to "Logout", session_path(current_user.id), method: :delete, class:'btn btn-secondary'  %>
     <% else %>
-      <%= link_to "Sing up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
+      <%= link_to "Sing up", new_user_path, class:'btn btn-secondary'  %>
+      <%= link_to "Login", new_session_path, class:'btn btn-secondary'  %>
     <% end %>
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

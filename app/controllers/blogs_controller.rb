@@ -54,7 +54,7 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
-    if @blog.user_id != current_user.idq
+    if @blog.user_id != current_user.id
       redirect_to blogs_path
     else
       @blog.destroy
