@@ -20,6 +20,9 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    unless @user.id == current_user.id
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update
@@ -33,8 +36,12 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to new_user_path, notice: "アカウントを削除しました！"
+    if @user.id != current_user.id
+      redirect_to user_path(current_user.id)
+    else
+      @user.destroy
+      redirect_to new_user_path, notice: "アカウントを削除しました！"
+    end
   end
   
 
