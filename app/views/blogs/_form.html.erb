@@ -20,11 +20,7 @@
 
   <div class="card-body">
     <h5 class="card-title">コメント</h5>
-    <p class="card-text"><%= @blog.content %></p>
-  </div>
-
-  <div class="card-body">
-    <a><%#<%= link_to '編集', edit_blog_path(blog.id), class:"card-link" %></a>
+    <p class="card-text"><%= form.text_field :content %></p>
   </div>
 </div>
 
